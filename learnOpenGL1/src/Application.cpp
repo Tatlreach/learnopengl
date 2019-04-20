@@ -1,4 +1,7 @@
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+//#include <iostream>
 
 int main(void)
 {
@@ -6,7 +9,6 @@ int main(void)
 	GLFWwindow* window;
 
 	//init library
-
 	if (!glfwInit()) {
 		return -1;
 	}
@@ -14,6 +16,15 @@ int main(void)
 	//make the window the current context
 	window = glfwCreateWindow(800, 600, "My Typed Up Triangle Window", NULL, NULL);
 	glfwMakeContextCurrent(window);
+
+	//MUST BE AFTER CONTEXT
+	if (glewInit() != GLEW_OK) {
+		//print something
+		//std::cout << "glewInit is not GLEW_OK" << '\n';
+	}
+
+
+	//std::cout << glGetString(GL_VERSION) << '\n';
 
 	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
