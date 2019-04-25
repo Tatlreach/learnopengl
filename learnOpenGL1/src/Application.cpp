@@ -35,12 +35,21 @@ int main(void)
 	//define buffer
 	unsigned int buffer;
 	glGenBuffers(1, &buffer);
-
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
+	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);	//fill it with data
 
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
 
-	//fill it with data
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0,	
+		2,	//number of components in ea. vertex
+		GL_FLOAT,			//Attribute Type
+		GL_FALSE,			//normalized
+		sizeof(float)*2,	//stride, total size of vertex
+		0);					//offset for the attribute WITHIN the vertex e.g. (const void*)8
+
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
+
 
 	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
