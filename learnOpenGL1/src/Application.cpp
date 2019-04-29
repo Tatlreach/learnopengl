@@ -4,9 +4,9 @@
 #include <iostream>
 
 static unsigned int CompileShader(unsigned int type, const std::string source ) {
-	unsigned int id = glCreateShader(GL_VERTEX_SHADER);
+	unsigned int id = glCreateShader(GL_VERTEX_SHADER);	//creates empty shader program to hold string src code
 	const char* src = source.c_str();	//return pointer to null terminated mutable array
-	glShaderSource(id, 1, &src, nullptr);
+	glShaderSource(id, 1, &src, nullptr);	//Replaces source code in shader object
 	glCompileShader(id);
 
 	//TODO: Error Handling
@@ -19,7 +19,7 @@ static int CreateShader(const std::string& vertexShader, const std::string& frag
 {
 	//each of these are program IDs
 	//can use GLuint  for type too
-	unsigned int program = glCreateProgram();
+	unsigned int program = glCreateProgram();		//creates empty program to contain shaders
 	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader );
 	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
 
