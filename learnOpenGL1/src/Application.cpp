@@ -115,17 +115,21 @@ int main(void)
 
 	//std::cout << glGetString(GL_VERSION) << '\n';
 
-	float positions[6] = {
+	float positions[12] = {
 		-.5f,	-.5f,
-		0.0f,	0.5f,
-		.5f,	-.5f
+		-.5f,	0.5f,
+		 .5f,	-.5f,
+
+		- .5f,	0.5f,
+		0.5f,	0.5f,
+		0.5f,	-.5f
 	};
 
 	//define buffer
 	unsigned int buffer;
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);	//fill it with data
+	glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW);	//fill it with data
 
 
 	glEnableVertexAttribArray(0);
@@ -155,7 +159,7 @@ int main(void)
 		//RENDER
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		//swap front & back buffers
 		glfwSwapBuffers(window);
