@@ -118,14 +118,16 @@ int main(void)
 	float positions[12] = {
 		-.5f,	-.5f,
 		-.5f,	0.5f,
-		 .5f,	-.5f,
-
-		- .5f,	0.5f,
+		0.5f,	-.5f,
 		0.5f,	0.5f,
-		0.5f,	-.5f
 	};
 
-	//define buffer
+	int indices[6] = {
+		0, 1, 2,
+		2, 3, 1
+	};
+
+	//define vertex buffer
 	unsigned int buffer;
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
@@ -141,7 +143,14 @@ int main(void)
 		0);					//offset for the attribute WITHIN the vertex e.g. (const void*)8
 
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
+	//define index buffer
+	unsigned int ibo;
+	glGenBuffers(1, &ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * 2 * sizeof(unsigned int), indices, GL_STATIC_DRAW);	//fill it with data
+
+
+//	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
 
 	ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
 
@@ -159,7 +168,9 @@ int main(void)
 		//RENDER
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+//		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		//dont' have to reference the buffer because it's already bound
 
 		//swap front & back buffers
 		glfwSwapBuffers(window);
