@@ -125,6 +125,8 @@ int main(void)
 	window = glfwCreateWindow(800, 600, "My Typed Up Triangle Window", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
+	glfwSwapInterval(1);
+
 	//MUST BE AFTER CONTEXT
 	if (glewInit() != GLEW_OK) {
 		//print something
@@ -176,25 +178,31 @@ int main(void)
 	unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
 	GLCall(glUseProgram(shader));
 
+	//requires bound shader
+	GLCall(int location = glGetUniformLocation(shader, "u_Color"));
+	ASSERT((location != -1));		//if -1, uniform wasn't found
+	GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
+
 	//std::cout << "#VERTEX" << '\n';
 	//std::cout << source.VertexSource << '\n' << '\n';
 	//std::cout << "#FRAGMENT" << '\n';
 	//std::cout << source.FragmentSource << std::endl;
 
-	bool errorsPrinted = false;
-
-	//loop until window closed
+	float r = 0.6f;
+	float increment = 0.05f;	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
 
 		//RENDER
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
-		if (!errorsPrinted) {
-
-		}
 		GLClearError();	//remove all existing error enums
 
-//		glDrawArrays(GL_TRIANGLES, 0, 6);
+		if ((r > 1.0f) || (r < 0.0f)) {
+			increment *= -1.0f;
+		}
+		r += increment;
+
+		GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 		//dont' have to reference the buffer because it's already bound
 
