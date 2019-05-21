@@ -152,7 +152,7 @@ int main(void)
 	unsigned int buffer;
 	GLCall(glGenBuffers(1, &buffer));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW));	//fill it with data
+	GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW));	//fill it with data
 
 
 	GLCall(glEnableVertexAttribArray(0));
