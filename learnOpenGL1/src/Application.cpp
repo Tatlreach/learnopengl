@@ -136,7 +136,7 @@ int main(void)
 
 	//std::cout << glGetString(GL_VERSION) << '\n';
 
-	float positions[12] = {
+	float positions[8] = {
 		-.5f,	-.5f,
 		-.5f,	0.5f,
 		0.5f,	-.5f,
