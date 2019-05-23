@@ -121,6 +121,11 @@ int main(void)
 		return -1;
 	}
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+
 	//make the window the current context
 	window = glfwCreateWindow(800, 600, "My Typed Up Triangle Window", NULL, NULL);
 	glfwMakeContextCurrent(window);
@@ -148,6 +153,10 @@ int main(void)
 		2, 3, 1
 	};
 
+	unsigned int vao;
+	GLCall(glGenVertexArrays(1, &vao));
+	GLCall(glBindVertexArray(vao));
+
 	//define vertex buffer
 	unsigned int buffer;
 	GLCall(glGenBuffers(1, &buffer));
@@ -156,6 +165,7 @@ int main(void)
 
 
 	GLCall(glEnableVertexAttribArray(0));
+	//links buffer with VAO
 	GLCall(glVertexAttribPointer(0,	//starting index of specified attribute
 		2,						//number of components in ea. vertex
 		GL_FLOAT,			//Attribute Type
@@ -188,6 +198,11 @@ int main(void)
 	//std::cout << "#FRAGMENT" << '\n';
 	//std::cout << source.FragmentSource << std::endl;
 
+	GLCall(glBindVertexArray(0));
+	GLCall(glUseProgram(0));
+	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
 	float r = 0.6f;
 	float increment = 0.05f;	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
@@ -202,7 +217,12 @@ int main(void)
 		}
 		r += increment;
 
+		GLCall(glUseProgram(shader));
 		GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
+
+		GLCall(glBindVertexArray(vao));
+		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 		//dont' have to reference the buffer because it's already bound
 
