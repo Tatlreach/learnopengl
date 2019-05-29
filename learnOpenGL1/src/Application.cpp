@@ -6,24 +6,10 @@
 #include <string>
 #include <sstream>
 
-#define ASSERT(x) if((!x)) __debugbreak();
-#define GLCall(x) GLClearError();\
-x;\
-ASSERT(GLLogCall(#x, __FILE__, __LINE__))
+#include "Renderer.h"
 
-
-static void GLClearError() {	//remove all existing error enums
-	while (glGetError());
-}
-
-static bool GLLogCall(const char* function, const char* file, int line) {	//print all existing error enums
-	while (GLenum error = glGetError()) {
-		std::cout << "[OpenGL Error] (" << error << "): " << function << " " << file <<": "<< line << '\n';
-		return false;
-	}
-
-	return true;
-}
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 struct ShaderProgramSource {
 	std::string VertexSource;
@@ -148,7 +134,7 @@ int main(void)
 		0.5f,	0.5f,
 	};
 
-	int indices[6] = {
+	unsigned int indices[6] = {
 		0, 1, 2,
 		2, 3, 1
 	};
@@ -158,11 +144,7 @@ int main(void)
 	GLCall(glBindVertexArray(vao));
 
 	//define vertex buffer
-	unsigned int buffer;
-	GLCall(glGenBuffers(1, &buffer));
-	GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
-	GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW));	//fill it with data
-
+	VertexBuffer vb(positions, 4 * 2 * sizeof(float));	//auto binds the vb
 
 	GLCall(glEnableVertexAttribArray(0));
 	//links buffer with VAO
@@ -171,15 +153,10 @@ int main(void)
 		GL_FLOAT,			//Attribute Type
 		GL_FALSE,			//normalized
 		sizeof(float) * 2,	//stride, total size of vertex
-		0));					//offset for the attribute WITHIN the vertex e.g. (const void*)8
-
+		0));					//offset for the attribute WITHIN the vertex e.g. (const void*)
 
 	//define index buffer
-	unsigned int ibo;
-	GLCall(glGenBuffers(1, &ibo));
-	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-	GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * 2 * sizeof(unsigned int), indices, GL_STATIC_DRAW));	//fill it with data
-
+	IndexBuffer ib(indices, 6);
 
 //	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
 
@@ -192,11 +169,6 @@ int main(void)
 	GLCall(int location = glGetUniformLocation(shader, "u_Color"));
 	ASSERT((location != -1));		//if -1, uniform wasn't found
 	GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
-
-	//std::cout << "#VERTEX" << '\n';
-	//std::cout << source.VertexSource << '\n' << '\n';
-	//std::cout << "#FRAGMENT" << '\n';
-	//std::cout << source.FragmentSource << std::endl;
 
 	GLCall(glBindVertexArray(0));
 	GLCall(glUseProgram(0));
@@ -221,7 +193,7 @@ int main(void)
 		GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 
 		GLCall(glBindVertexArray(vao));
-		GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
+		ib.Bind();
 
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 		//dont' have to reference the buffer because it's already bound
