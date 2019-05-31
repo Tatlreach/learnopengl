@@ -11,6 +11,8 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
+#include "VertexArray.h"
+
 struct ShaderProgramSource {
 	std::string VertexSource;
 	std::string FragmentSource;
@@ -140,12 +142,18 @@ int main(void)
 	};
 
 	unsigned int vao;
-	GLCall(glGenVertexArrays(1, &vao));
-	GLCall(glBindVertexArray(vao));
+
+
+	VertexArray va;
 
 	//define vertex buffer
 	VertexBuffer vb(positions, 4 * 2 * sizeof(float));	//auto binds the vb
 
+
+	VertexBufferLayout layout;
+	layout.Push<float>(2);
+	va.AddBuffer(vb, layout);
+	/*
 	GLCall(glEnableVertexAttribArray(0));
 	//links buffer with VAO
 	GLCall(glVertexAttribPointer(0,	//starting index of specified attribute
@@ -154,6 +162,7 @@ int main(void)
 		GL_FALSE,			//normalized
 		sizeof(float) * 2,	//stride, total size of vertex
 		0));					//offset for the attribute WITHIN the vertex e.g. (const void*)
+*/
 
 	//define index buffer
 	IndexBuffer ib(indices, 6);
@@ -192,7 +201,7 @@ int main(void)
 		GLCall(glUseProgram(shader));
 		GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 
-		GLCall(glBindVertexArray(vao));
+		va.Bind();	//remove following line
 		ib.Bind();
 
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
