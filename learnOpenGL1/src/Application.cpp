@@ -12,92 +12,8 @@
 #include "IndexBuffer.h"
 
 #include "VertexArray.h"
+#include "Shader.h"
 
-struct ShaderProgramSource {
-	std::string VertexSource;
-	std::string FragmentSource;
-};
-
-static ShaderProgramSource ParseShader(const std::string& filepath) {
-	std::ifstream stream(filepath);
-
-	enum class ShaderType {
-		NONE = -1, VERTEX = 0, FRAGMENT = 1
-	};
-	
-	std::stringstream ss[2];
-	std::string line;
-	ShaderType type = ShaderType::NONE;
-	while (getline(stream, line)) {
-		if (line.find("#shader") != std::string::npos) {
-			if (line.find("vertex") != std::string::npos) {
-				//set mode to vertex
-				type = ShaderType::VERTEX;
-			}
-			else if (line.find("fragment") != std::string::npos) {
-				//set mode to fragment
-				type = ShaderType::FRAGMENT;
-			}
-		}
-		else {
-			//push line to specific type of stringstream
-			ss[(int)type] << line << '\n';
-		}
-
-	}
-	return { ss[0].str(), ss[1].str() };
-}
-
-static unsigned int CompileShader(unsigned int type, const std::string source ) {
-	unsigned int id = glCreateShader(type);	//creates empty shader program to hold string src code
-	const char* src = source.c_str();	//return pointer to null terminated mutable array
-	GLCall(glShaderSource(id, 1, &src, nullptr));	//Replaces source code in shader object
-	GLCall(glCompileShader(id));				//compiles the string code in the shader
-
-
-	//Error Handling
-	int result;
-	GLCall(glGetShaderiv(id, GL_COMPILE_STATUS, &result));	//i: integer, v: vector //query the compile to see errors
-
-	if (result == GL_FALSE) {
-		//did not compile
-		int length;
-		GLCall(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
-		char* message = (char*) alloca(length * sizeof(char));
-		GLCall(glGetShaderInfoLog(id, length, &length, message));
-		std::cout << "failed to compile " << (type==GL_VERTEX_SHADER? "vertex" : "fragment") <<" shader" << '\n';
-		std::cout << message << std::endl;
-		GLCall(glDeleteShader(id));
-		return 0;
-	}
-
-	return id;
-}
-
-//returns an ID for the shader
-static unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
-{
-	//each of these are program IDs
-	//can use GLuint  for type too
-	unsigned int program = glCreateProgram();		//creates empty program to contain shaders
-	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader );
-	unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
-
-	//link 2 shaders into 1 file
-	GLCall(glAttachShader(program, vs));
-	GLCall(glAttachShader(program, fs));
-	GLCall(glLinkProgram(program));
-	GLCall(glValidateProgram(program));		//checks if program is runnable given state, if succeeds GL_TRUE is stored as part of the program object's state
-
-
-	//glDetachShader properly deletes source code
-	//glDetachShader right away removes a lot of debugging options
-	//deletes the intermediates, actual
-	GLCall(glDeleteShader(vs));
-	GLCall(glDeleteShader(fs));
-
-	return program;
-}
 
 int main(void)
 {
@@ -169,15 +85,13 @@ int main(void)
 
 //	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
 
-	ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
 
-	unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
-	GLCall(glUseProgram(shader));
+	Shader shader("res/shaders/Basic.shader");
+	shader.Bind();
 
 	//requires bound shader
-	GLCall(int location = glGetUniformLocation(shader, "u_Color"));
-	ASSERT((location != -1));		//if -1, uniform wasn't found
-	GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
+	shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+	shader.Unbind();
 
 	GLCall(glBindVertexArray(0));
 	GLCall(glUseProgram(0));
@@ -198,8 +112,9 @@ int main(void)
 		}
 		r += increment;
 
-		GLCall(glUseProgram(shader));
-		GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
+
+		shader.Bind();
+		shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
 		va.Bind();	//remove following line
 		ib.Bind();
@@ -217,7 +132,7 @@ int main(void)
 		glfwPollEvents();
 	}
 
-	GLCall(glDeleteProgram(shader));
+	//GLCall(glDeleteProgram(shader));
 	glfwTerminate();
 	return 0;
 }
