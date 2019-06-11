@@ -57,9 +57,6 @@ int main(void)
 		2, 3, 1
 	};
 
-	unsigned int vao;
-
-
 	VertexArray va;
 
 	//define vertex buffer
@@ -119,6 +116,8 @@ int main(void)
 		va.Bind();	//remove following line
 		ib.Bind();
 
+
+		//draw what is bound
 		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 		//dont' have to reference the buffer because it's already bound
 
