@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['_7eindexbuffer',['~IndexBuffer',['../class_index_buffer.html#a348889936f378b7942c1e01d83e42866',1,'IndexBuffer']]],
-  ['_7eshader',['~Shader',['../class_shader.html#aff01df87e8a102f270b5b135a295e59d',1,'Shader']]],
-  ['_7evertexarray',['~VertexArray',['../class_vertex_array.html#a82597eb9daba5ad66dd3cf898e159a95',1,'VertexArray']]],
-  ['_7evertexbuffer',['~VertexBuffer',['../class_vertex_buffer.html#a5216726fdd43b2ae8e1439e347717fdd',1,'VertexBuffer']]]
+  ['vertexarray',['VertexArray',['../class_vertex_array.html#ab8a2dcce9698f96dac5f9a19c6979d03',1,'VertexArray']]],
+  ['vertexbuffer',['VertexBuffer',['../class_vertex_buffer.html#af8adb744d388d978af68035cf8254425',1,'VertexBuffer']]],
+  ['vertexbufferlayout',['VertexBufferLayout',['../class_vertex_buffer_layout.html#a1e10e1d0c533a91948466fa4f88bab09',1,'VertexBufferLayout']]]
 ];

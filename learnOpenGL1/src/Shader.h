@@ -24,12 +24,23 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
-	//set uniforms
+	//!set uniforms
 	void SetUniform4f(const std::string& name, float v0, float v1, float f0, float f1);
 
 private:
-	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+
+	
+	///	parses the text files for vertex & fragment tags.  
+	///	makes an object containing these source strings
 	ShaderProgramSource ParseShader(const std::string & filepath);
+
+
+	///calls 'CompileShader' on arguments
+	///attaches, links & validates a created program
+	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
+	
+	///	creates a shader from source.  
+	///	compiles the shader
 	unsigned int CompileShader(unsigned int type, const std::string source);
 	unsigned int GetUnifromLocation(const std::string& name);
 

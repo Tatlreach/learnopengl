@@ -48,10 +48,10 @@ unsigned int Shader::CreateShader(const std::string& vertexShader, const std::st
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string source) {
-	unsigned int id = glCreateShader(type);	//creates empty shader program to hold string src code
-	const char* src = source.c_str();	//return pointer to null terminated mutable array
+	unsigned int id = glCreateShader(type);			//creates empty shader program to hold string src code
+	const char* src = source.c_str();				//return pointer to null terminated mutable array
 	GLCall(glShaderSource(id, 1, &src, nullptr));	//Replaces source code in shader object
-	GLCall(glCompileShader(id));				//compiles the string code in the shader
+	GLCall(glCompileShader(id));					//compiles the string code in the shader
 
 
 	//Error Handling

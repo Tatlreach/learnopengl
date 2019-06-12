@@ -5,10 +5,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>learnOpenGL1: Shader Class Reference</title>
+<title>My Project: Shader Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -21,7 +29,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">learnOpenGL1
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -45,6 +53,23 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('class_shader.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,10 +84,11 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_shader-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Shader Class Reference</div>  </div>
@@ -82,12 +108,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aebfe8baf7c63c605e0ed429085a4e06a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#aebfe8baf7c63c605e0ed429085a4e06a">Unbind</a> () const</td></tr>
 <tr class="separator:aebfe8baf7c63c605e0ed429085a4e06a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09611391885e94289fd1e58ce0b4ab8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#a09611391885e94289fd1e58ce0b4ab8c">SetUniform4f</a> (const std::string &amp;name, float v0, float v1, float f0, float f1)</td></tr>
+<tr class="memdesc:a09611391885e94289fd1e58ce0b4ab8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">set uniforms  <a href="#a09611391885e94289fd1e58ce0b4ab8c">More...</a><br /></td></tr>
 <tr class="separator:a09611391885e94289fd1e58ce0b4ab8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:af4a0151fa9ade8c81ac7ec6bc1aef0c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_shader_program_source.html">ShaderProgramSource</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#af4a0151fa9ade8c81ac7ec6bc1aef0c5">ParseShader</a> (const std::string &amp;filepath)</td></tr>
+<tr class="separator:af4a0151fa9ade8c81ac7ec6bc1aef0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45d0ed9766d61ed6465c378ad4bdea13"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#a45d0ed9766d61ed6465c378ad4bdea13">CreateShader</a> (const std::string &amp;vertexShader, const std::string &amp;fragmentShader)</td></tr>
+<tr class="separator:a45d0ed9766d61ed6465c378ad4bdea13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed88e5adc6d100499f7036a4fce8707b"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#aed88e5adc6d100499f7036a4fce8707b">CompileShader</a> (unsigned int type, const std::string source)</td></tr>
+<tr class="separator:aed88e5adc6d100499f7036a4fce8707b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e2344fa07e23b44821cf6322833dac"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#a28e2344fa07e23b44821cf6322833dac">GetUnifromLocation</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:a28e2344fa07e23b44821cf6322833dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac220dd4437fff5a20a20caecc10cf075"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#ac220dd4437fff5a20a20caecc10cf075">m_FilePath</a></td></tr>
+<tr class="separator:ac220dd4437fff5a20a20caecc10cf075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a5c07b2c962e5c31810cd7a5d93026d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#a1a5c07b2c962e5c31810cd7a5d93026d">m_RendererID</a></td></tr>
+<tr class="separator:a1a5c07b2c962e5c31810cd7a5d93026d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f349dc735c37337104a670f584ba706"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shader.html#a4f349dc735c37337104a670f584ba706">m_UniformLocationCache</a></td></tr>
+<tr class="separator:a4f349dc735c37337104a670f584ba706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_shader_8h_source.html#l00010">10</a> of file <a class="el" href="_shader_8h_source.html">Shader.h</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a723ccb160694ce83183aff4a8daca0d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a723ccb160694ce83183aff4a8daca0d0">&#9670;&nbsp;</a></span>Shader()</h2>
 
@@ -103,8 +147,6 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shader_8cpp_source.html#l00012">12</a> of file <a class="el" href="_shader_8cpp_source.html">Shader.cpp</a>.</p>
 
 </div>
 </div>
@@ -122,8 +164,6 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_shader_8cpp_source.html#l00021">21</a> of file <a class="el" href="_shader_8cpp_source.html">Shader.cpp</a>.</p>
 
 </div>
 </div>
@@ -143,7 +183,131 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shader_8cpp_source.html#l00108">108</a> of file <a class="el" href="_shader_8cpp_source.html">Shader.cpp</a>.</p>
+</div>
+</div>
+<a id="aed88e5adc6d100499f7036a4fce8707b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed88e5adc6d100499f7036a4fce8707b">&#9670;&nbsp;</a></span>CompileShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Shader::CompileShader </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>creates a shader from source compiles the shader </p>
+
+</div>
+</div>
+<a id="a45d0ed9766d61ed6465c378ad4bdea13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45d0ed9766d61ed6465c378ad4bdea13">&#9670;&nbsp;</a></span>CreateShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Shader::CreateShader </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>vertexShader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fragmentShader</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28e2344fa07e23b44821cf6322833dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e2344fa07e23b44821cf6322833dac">&#9670;&nbsp;</a></span>GetUnifromLocation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Shader::GetUnifromLocation </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af4a0151fa9ade8c81ac7ec6bc1aef0c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4a0151fa9ade8c81ac7ec6bc1aef0c5">&#9670;&nbsp;</a></span>ParseShader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_shader_program_source.html">ShaderProgramSource</a> Shader::ParseShader </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filepath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>parses the text files for vertex &amp; fragment tags makes an object containing these source strings </p>
 
 </div>
 </div>
@@ -191,7 +355,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shader_8cpp_source.html#l00118">118</a> of file <a class="el" href="_shader_8cpp_source.html">Shader.cpp</a>.</p>
+<p>set uniforms </p>
 
 </div>
 </div>
@@ -210,20 +374,89 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shader_8cpp_source.html#l00113">113</a> of file <a class="el" href="_shader_8cpp_source.html">Shader.cpp</a>.</p>
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac220dd4437fff5a20a20caecc10cf075"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac220dd4437fff5a20a20caecc10cf075">&#9670;&nbsp;</a></span>m_FilePath</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Shader::m_FilePath</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1a5c07b2c962e5c31810cd7a5d93026d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a5c07b2c962e5c31810cd7a5d93026d">&#9670;&nbsp;</a></span>m_RendererID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Shader::m_RendererID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f349dc735c37337104a670f584ba706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f349dc735c37337104a670f584ba706">&#9670;&nbsp;</a></span>m_UniformLocationCache</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, int&gt; Shader::m_UniformLocationCache</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_shader_8h_source.html">Shader.h</a></li>
-<li><a class="el" href="_shader_8cpp_source.html">Shader.cpp</a></li>
+<li><a class="el" href="_shader_8cpp.html">Shader.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.15
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_shader.html">Shader</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+  </ul>
+</div>
 </body>
 </html>

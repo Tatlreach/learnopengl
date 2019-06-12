@@ -24,9 +24,9 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout & l
 		const auto& element = elements[i];
 		GLCall(glEnableVertexAttribArray(i));
 		//links buffer with VAO
-		GLCall(glVertexAttribPointer(i,	//starting index of specified attribute
-			element.count,				//number of components in ea. vertex
-			element.type,				//Attribute Type
+		GLCall(glVertexAttribPointer(i,	//index, starting index of specified attribute
+			element.count,				//size, number of components in ea. vertex
+			element.type,				//type, Attribute Type
 			element.normalized,			//normalized
 			layout.GetStride(),			//stride, total size of vertex
 			(const void*)offset));		//offset for the attribute WITHIN the vertex e.g. (const void*)

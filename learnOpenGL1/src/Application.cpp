@@ -104,7 +104,8 @@ int main(void)
 
 		GLClearError();	//remove all existing error enums
 
-		if ((r > 1.0f) || (r < 0.0f)) {
+		//change color every tick
+		if ((r > 1.0f) || (r < 0.0f)) {		
 			increment *= -1.0f;
 		}
 		r += increment;
