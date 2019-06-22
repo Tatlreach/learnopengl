@@ -85,8 +85,7 @@ var NAVTREEINDEX0 =
 "struct_shader_program_source.html#a3024eb3311331ec8ab58d4b5ee12d232":[0,0,2,1],
 "struct_shader_program_source.html#a332e9f1bba047b29bd872301ce5289ab":[0,0,2,0],
 "struct_vertex_buffer_element.html":[0,0,5],
-"struct_vertex_buffer_element.html#a8465417a435f8bcd68a71bc414f1d0ee":[0,0,5,0],
-"struct_vertex_buffer_element.html#aa5216544514d8d4c9baab824d6e48c06":[0,0,5,2],
-"struct_vertex_buffer_element.html#aebaf924b86871f57f006846ba7443676":[0,0,5,3],
-"struct_vertex_buffer_element.html#af2d13355b799b11b6ffbc0a34fb03f8a":[0,0,5,1]
+"struct_vertex_buffer_element.html#aa5216544514d8d4c9baab824d6e48c06":[0,0,5,1],
+"struct_vertex_buffer_element.html#aebaf924b86871f57f006846ba7443676":[0,0,5,2],
+"struct_vertex_buffer_element.html#af2d13355b799b11b6ffbc0a34fb03f8a":[0,0,5,0]
 };
