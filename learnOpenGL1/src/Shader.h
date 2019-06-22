@@ -30,17 +30,17 @@ public:
 private:
 
 	
-	///	parses the text files for vertex & fragment tags.  
-	///	makes an object containing these source strings
+	///	Parses the text files for vertex & fragment tags.  
+	///	Makes an object containing these source strings.
 	ShaderProgramSource ParseShader(const std::string & filepath);
 
 
-	///calls 'CompileShader' on arguments
-	///attaches, links & validates a created program
+	/// Calls 'CompileShader' on arguments.  
+	/// Creates a program, attaches both shaders, links program, & validates 
 	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	
-	///	creates a shader from source.  
-	///	compiles the shader
+	///	Creates a shader from source.  
+	///	Compiles the shader.
 	unsigned int CompileShader(unsigned int type, const std::string source);
 	unsigned int GetUnifromLocation(const std::string& name);
 

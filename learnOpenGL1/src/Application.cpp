@@ -42,8 +42,8 @@ int main(void)
 		//std::cout << "glewInit is not GLEW_OK" << '\n';
 	}
 
-
 	//std::cout << glGetString(GL_VERSION) << '\n';
+
 
 	float positions[8] = {
 		-.5f,	-.5f,
