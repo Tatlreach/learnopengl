@@ -6,6 +6,7 @@ class IndexBuffer {
 		unsigned int m_Count;
 
 	public:
+		/// Generates buffers.  Binds GL_ELEMENT_ARRAY_BUFFER.  Writes the buffers.
 		IndexBuffer(const unsigned int* data, unsigned int count);
 		~IndexBuffer();
 
