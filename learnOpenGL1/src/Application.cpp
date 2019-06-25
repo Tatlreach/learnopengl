@@ -9,6 +9,7 @@
 #include "Renderer.h"
 
 #include "VertexBuffer.h"
+#include "VertexBufferLayout.h"
 #include "IndexBuffer.h"
 
 #include "VertexArray.h"
@@ -88,22 +89,26 @@ int main(void)
 
 	//requires bound shader
 	shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
-	shader.Unbind();
 
 	// NULL binds all elements
-	GLCall(glBindVertexArray(0));
-	GLCall(glUseProgram(0));
-	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
-	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+	va.Unbind();
+	vb.Unbind();
+//	GLCall(glBindVertexArray(0));
+//	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+
+	ib.Unbind();
+	//	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+
+	shader.Unbind();
+//	GLCall(glUseProgram(0));
+
+	Renderer renderer;
 
 	float r = 0.6f;				//red val seed
 	float increment = 0.05f;	//red val inc every refresh
 	
 	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
-
-		//RENDER
-		GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
 		GLClearError();	//remove all existing error enums
 
@@ -117,15 +122,7 @@ int main(void)
 		shader.Bind();
 		shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
-		va.Bind();	//remove following line
-		ib.Bind();
-
-
-		//draw what is bound
-		GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-		//dont' have to reference the buffer because it's already bound
-
-		
+		renderer.Draw(va, ib, shader);
 //		ASSERT(GLLogCall());	//print all existing error enums
 
 		//swap front & back buffers

@@ -16,6 +16,8 @@ private:
 	std::unordered_map<std::string, int> m_UniformLocationCache;
 
 public:
+	/// "ParseShader" on txt file for shader source
+	/// "CreateShader" on sources
 	Shader(const std::string& filepath);
 	~Shader();
 
@@ -28,15 +30,12 @@ public:
 	void SetUniform4f(const std::string& name, float v0, float v1, float f0, float f1);
 
 private:
-
-	
 	///	Parses the text files for vertex & fragment tags.  
 	///	Makes an object containing these source strings.
 	ShaderProgramSource ParseShader(const std::string & filepath);
 
-
 	/// Calls 'CompileShader' on arguments.  
-	/// Creates a program, attaches both shaders, links program, & validates 
+	/// Creates a program,  attaches both shaders,  links program, & validates 
 	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 	
 	///	Creates a shader from source.  
