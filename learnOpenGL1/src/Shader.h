@@ -24,7 +24,7 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
-	//!set uniforms
+	/// uses glUniform4f(...) to set a "uniform vec4 name" in the shader
 	void SetUniform4f(const std::string& name, float v0, float v1, float f0, float f1);
 
 private:

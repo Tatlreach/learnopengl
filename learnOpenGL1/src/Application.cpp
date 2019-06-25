@@ -59,8 +59,8 @@ int main(void)
 
 	VertexArray va;
 
-	//define vertex buffer
-	VertexBuffer vb(positions, 4 * 2 * sizeof(float));	//auto binds the vb
+	//VertexBuffer(datal, size)		//auto binds the vb
+	VertexBuffer vb(positions, 4 * 2 * sizeof(float));	
 
 
 	VertexBufferLayout layout;
@@ -90,13 +90,16 @@ int main(void)
 	shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 	shader.Unbind();
 
+	// NULL binds all elements
 	GLCall(glBindVertexArray(0));
 	GLCall(glUseProgram(0));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 
-	float r = 0.6f;
-	float increment = 0.05f;	//loop until window closed
+	float r = 0.6f;				//red val seed
+	float increment = 0.05f;	//red val inc every refresh
+	
+	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
 
 		//RENDER
@@ -104,7 +107,7 @@ int main(void)
 
 		GLClearError();	//remove all existing error enums
 
-		//change color every tick
+		//adjust red val every tick
 		if ((r > 1.0f) || (r < 0.0f)) {		
 			increment *= -1.0f;
 		}
