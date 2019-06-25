@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "Renderer.h"
 
+/// Contains metadata about a Buffer's sequence of types (count, type(thus size), normalized)
 struct VertexBufferElement {
 	unsigned int count;
 	unsigned int type;
@@ -14,11 +15,12 @@ struct VertexBufferElement {
 			case GL_UNSIGNED_INT:	return 4;
 			case GL_UNSIGNED_BYTE:	return 1;
 		}
-		ASSERT(false);
+		ASSERT(false);		//unrecognized type
 		return 0;
 	}
 };
 
+/// Maintains a vec of structs that store Metadata of the Buffer's data
 class VertexBufferLayout {
 private:
 	std::vector< VertexBufferElement> m_Elements;
@@ -26,6 +28,7 @@ private:
 public:
 	VertexBufferLayout() : m_Stride(0) {};
 
+	
 	template<typename T>
 	void Push(unsigned int count) {
 		static_assert(false);

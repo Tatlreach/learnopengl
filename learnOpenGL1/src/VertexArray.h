@@ -3,6 +3,7 @@
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
 
+/// Contains VertexBuffer & VertexBufferLayout (metadata about buffer types,counts,normalized)
 class VertexArray {
 private:
 	unsigned int m_RendererID;

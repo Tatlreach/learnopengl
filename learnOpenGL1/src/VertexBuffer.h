@@ -4,7 +4,7 @@ class VertexBuffer {
 	private:
 		unsigned int m_RendererID;
 	public:
-		/// Generates buffers. Binds GL_ARRAY_BUFFER. Writes the buffers.
+		/// Generates buffer. Binds GL_ARRAY_BUFFER. Writes data to buffer.
 		VertexBuffer(const void* data, unsigned int size);
 		~VertexBuffer();
 
