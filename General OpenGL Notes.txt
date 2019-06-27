@@ -1,3 +1,18 @@
 General OpenGL Notes
 
 glUseProgram is the "Bind" of shaders
+
+GLSL	opengl programming lang
+	int, float, double,  bool, uint
+	
+    vecn: default vector of n floats.
+    bvecn: vector of n booleans.
+    ivecn: vector of n integers.
+    uvecn: vector of n unsigned integers.
+    dvecn: vector of n double components.
+
+	Swizzling
+		vec2 someVec;
+		vec4 differentVec = someVec.xyxx;
+		vec3 anotherVec = differentVec.zyw;
+		vec4 otherVec = someVec.xxxx + anotherVec.yxzy;
