@@ -27,6 +27,7 @@ public:
 	void Unbind() const;
 
 	/// uses glUniform4f(...) to set a "uniform vec4 name" in the shader
+	void SetUniform1i(const std::string& name, int value);
 	void SetUniform4f(const std::string& name, float v0, float v1, float f0, float f1);
 
 private:
@@ -41,6 +42,6 @@ private:
 	///	Creates a shader from source.  
 	///	Compiles the shader.
 	unsigned int CompileShader(unsigned int type, const std::string source);
-	unsigned int GetUnifromLocation(const std::string& name);
+	int GetUniformLocation(const std::string& name);
 
 };

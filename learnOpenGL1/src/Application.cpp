@@ -15,6 +15,8 @@
 #include "VertexArray.h"
 #include "Shader.h"
 
+#include "Texture.h"
+
 
 int main(void)
 {
@@ -89,6 +91,11 @@ int main(void)
 
 	//requires bound shader
 	shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+
+	Texture texture("res/textures/example_image.png");
+	//bind slot needs to match set uniform slot
+	texture.Bind(0);
+	shader.SetUniform1i("u_Texture", 0);
 
 	// NULL binds all elements
 	va.Unbind();
