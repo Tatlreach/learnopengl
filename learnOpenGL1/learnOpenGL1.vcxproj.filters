@@ -76,5 +76,8 @@
     <Image Include="res\textures\example_image.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\textures\clover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

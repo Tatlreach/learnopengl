@@ -48,11 +48,11 @@ int main(void)
 	//std::cout << glGetString(GL_VERSION) << '\n';
 
 
-	float positions[8] = {
-		-.5f,	-.5f,
-		-.5f,	0.5f,
-		0.5f,	-.5f,
-		0.5f,	0.5f,
+	float positions[] = {
+		-0.5f,	-0.5f,	0.0f, 0.0f,	// left bottom
+		-0.5f,	0.5f,	0.0f, 1.0f,	// left top
+		0.5f,	-0.5f,	1.0f, 0.0f,	// right bottom
+		0.5f,	0.5f,	1.0f, 1.0f	// right top
 	};
 
 	unsigned int indices[6] = {
@@ -63,10 +63,11 @@ int main(void)
 	VertexArray va;
 
 	//VertexBuffer(datal, size)		//auto binds the vb
-	VertexBuffer vb(positions, 4 * 2 * sizeof(float));	
+	VertexBuffer vb(positions, 4 * 4 * sizeof(float));	//4 floats per vertex
 
 
 	VertexBufferLayout layout;
+	layout.Push<float>(2);
 	layout.Push<float>(2);
 	va.AddBuffer(vb, layout);
 	/*
@@ -90,12 +91,12 @@ int main(void)
 	shader.Bind();
 
 	//requires bound shader
-	shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+	//shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
-	Texture texture("res/textures/example_image.png");
+	Texture texture("res/textures/clover.png");
 	//bind slot needs to match set uniform slot
 	texture.Bind(0);
-	shader.SetUniform1i("u_Texture", 0);
+	shader.SetUniform1i("u_Texture", 0);	//0 has to match bound slot for texture
 
 	// NULL binds all elements
 	va.Unbind();
@@ -127,7 +128,7 @@ int main(void)
 
 
 		shader.Bind();
-		shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+		//shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
 		renderer.Draw(va, ib, shader);
 //		ASSERT(GLLogCall());	//print all existing error enums

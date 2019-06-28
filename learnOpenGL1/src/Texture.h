@@ -10,6 +10,7 @@ private:
 	int m_Width, m_Height, m_BPP;
 
 public:
+	/// stbi_loads texture from path.  Gen's a Texture. Sets default texture parameters
 	Texture(const std::string & path);
 	~Texture();
 

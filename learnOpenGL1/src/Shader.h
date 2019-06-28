@@ -26,7 +26,8 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
-	/// uses glUniform4f(...) to set a "uniform vec4 name" in the shader
+	/// uses glUniform4f(...) to set a "uniform vec4 name" in the shader.  
+	/// value is the bound slot for the texture given
 	void SetUniform1i(const std::string& name, int value);
 	void SetUniform4f(const std::string& name, float v0, float v1, float f0, float f1);
 

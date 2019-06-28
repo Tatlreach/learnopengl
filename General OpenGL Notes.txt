@@ -2,6 +2,8 @@ General OpenGL Notes
 
 glUseProgram is the "Bind" of shaders
 
+Typical systems have 32 texture slots (mobile has less (8))
+
 GLSL	opengl programming lang
 	int, float, double,  bool, uint
 	
