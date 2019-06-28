@@ -60,6 +60,10 @@ int main(void)
 		2, 3, 1
 	};
 
+	//setting how opengl blends alpha pixels
+	GLCall(glEnable(GL_BLEND));
+	GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
 	VertexArray va;
 
 	//VertexBuffer(datal, size)		//auto binds the vb
