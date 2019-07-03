@@ -17,6 +17,9 @@
 
 #include "Texture.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 
 int main(void)
 {
@@ -89,7 +92,7 @@ int main(void)
 	IndexBuffer ib(indices, 6);
 
 //	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
-
+	//glm::mat4 proj = glm::ortho()
 
 	Shader shader("res/shaders/Basic.shader");
 	shader.Bind();
