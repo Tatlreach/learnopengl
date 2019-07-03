@@ -92,13 +92,16 @@ int main(void)
 	IndexBuffer ib(indices, 6);
 
 //	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
-	//glm::mat4 proj = glm::ortho()
+	//4x4 matrix
+	glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);	//creates orthographic matrix
 
 	Shader shader("res/shaders/Basic.shader");
 	shader.Bind();
 
 	//requires bound shader
 	//shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+
+	shader.SetUniformMat4f("u_MVP", proj);
 
 	Texture texture("res/textures/clover.png");
 	//bind slot needs to match set uniform slot
