@@ -122,8 +122,8 @@ int main(void)
 
 	Renderer renderer;
 
-	float r = 0.6f;				//red val seed
-	float increment = 0.05f;	//red val inc every refresh
+	float r = 0.6f;				//red value seed
+	float increment = 0.05f;	// increment the red value every refresh
 	
 	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {

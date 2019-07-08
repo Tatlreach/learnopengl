@@ -18,3 +18,10 @@ GLSL	opengl programming lang
 		vec4 differentVec = someVec.xyxx;
 		vec3 anotherVec = differentVec.zyw;
 		vec4 otherVec = someVec.xxxx + anotherVec.yxzy;
+		
+	3 main Projection Matrices
+		Model View Projection
+			Model: objects transform TRS(translation | rotation | scale) 
+			View: Simulates Camera: (Position | Rotation |Scale)
+			Projection
+		position is multiplied by each to get the final render position
