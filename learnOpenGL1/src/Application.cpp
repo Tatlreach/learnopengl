@@ -37,7 +37,7 @@ int main(void)
 
 
 	//make the window the current context
-	window = glfwCreateWindow(800, 600, "My Typed Up Triangle Window", NULL, NULL);
+	window = glfwCreateWindow(960, 540, "My Typed Up Triangle Window", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
 	glfwSwapInterval(1);
@@ -52,10 +52,10 @@ int main(void)
 
 
 	float positions[] = {
-		-0.5f,	-0.5f,	0.0f, 0.0f,	// left bottom
-		-0.5f,	0.5f,	0.0f, 1.0f,	// left top
-		0.5f,	-0.5f,	1.0f, 0.0f,	// right bottom
-		0.5f,	0.5f,	1.0f, 1.0f	// right top
+		100.0f, 100.0f,	0.0f, 0.0f,	// left bottom
+		100.0f, 200.0f, 0.0f, 1.0f, // left top
+		200.0f,	100.0f,	1.0f, 0.0f,	// right bottom
+		200.0f,	200.0f,	1.0f, 1.0f	// right top
 	};
 
 	unsigned int indices[6] = {
@@ -90,10 +90,13 @@ int main(void)
 
 	//define index buffer
 	IndexBuffer ib(indices, 6);
-
 //	glBindBuffer(GL_ARRAY_BUFFER, 0);	//bind to empty buffer
 	//4x4 matrix
-	glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);	//creates orthographic matrix
+	//creates orthographic matrix,
+	glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);	 //when multiplied, converts it to a space between -1 & 1
+	glm::vec4 vp(100.0f, 100.0f, 0.0f, 1.0f);
+
+	glm::vec4 result = proj * vp ;
 
 	Shader shader("res/shaders/Basic.shader");
 	shader.Bind();
