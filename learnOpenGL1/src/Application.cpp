@@ -96,6 +96,13 @@ int main(void)
 	glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);	 //when multiplied, converts it to a space between -1 & 1
 	glm::vec4 vp(100.0f, 100.0f, 0.0f, 1.0f);
 
+	//camera transformations are actually reverse, because we're acting on the world not the camera
+	glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 0.0f));	//creates an identity matrix (of 1s), translates x -100.0f
+
+	glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 100.0f, 0.0f));
+
+	glm::mat4 mvp = proj * view * model;
+
 	glm::vec4 result = proj * vp ;
 
 	Shader shader("res/shaders/Basic.shader");
@@ -104,7 +111,7 @@ int main(void)
 	//requires bound shader
 	//shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
-	shader.SetUniformMat4f("u_MVP", proj);
+	shader.SetUniformMat4f("u_MVP", mvp);
 
 	Texture texture("res/textures/clover.png");
 	//bind slot needs to match set uniform slot
