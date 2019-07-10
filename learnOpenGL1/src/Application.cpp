@@ -20,6 +20,9 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_glfw_gl3.h"
+
 
 int main(void)
 {
@@ -94,16 +97,11 @@ int main(void)
 	//4x4 matrix
 	//creates orthographic matrix,
 	glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);	 //when multiplied, converts it to a space between -1 & 1
-	glm::vec4 vp(100.0f, 100.0f, 0.0f, 1.0f);
 
 	//camera transformations are actually reverse, because we're acting on the world not the camera
 	glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 0.0f));	//creates an identity matrix (of 1s), translates x -100.0f
 
-	glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 100.0f, 0.0f));
 
-	glm::mat4 mvp = proj * view * model;
-
-	glm::vec4 result = proj * vp ;
 
 	Shader shader("res/shaders/Basic.shader");
 	shader.Bind();
@@ -111,7 +109,6 @@ int main(void)
 	//requires bound shader
 	//shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
 
-	shader.SetUniformMat4f("u_MVP", mvp);
 
 	Texture texture("res/textures/clover.png");
 	//bind slot needs to match set uniform slot
@@ -132,13 +129,22 @@ int main(void)
 
 	Renderer renderer;
 
+	ImGui::CreateContext();
+	ImGui_ImplGlfwGL3_Init(window, true);
+	ImGui::StyleColorsDark();
+
+	glm::vec3 translation(200.0f, 200.0f, 0.0f);
+
 	float r = 0.6f;				//red value seed
 	float increment = 0.05f;	// increment the red value every refresh
 	
 	//loop until window closed
 	while (!glfwWindowShouldClose(window)) {
 
-		GLClearError();	//remove all existing error enums
+		//GLClearError();	//remove all existing error enums
+		renderer.Clear();
+
+		ImGui_ImplGlfwGL3_NewFrame();
 
 		//adjust red val every tick
 		if ((r > 1.0f) || (r < 0.0f)) {		
@@ -146,12 +152,28 @@ int main(void)
 		}
 		r += increment;
 
+		glm::mat4 model = glm::translate(glm::mat4(1.0f), translation);
+		glm::mat4 mvp = proj * view * model;
+
 
 		shader.Bind();
 		//shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+		shader.SetUniformMat4f("u_MVP", mvp);
 
 		renderer.Draw(va, ib, shader);
 //		ASSERT(GLLogCall());	//print all existing error enums
+
+		// 1. Show a simple window.
+		// Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets automatically appears in a window called "Debug".
+		{
+			ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);
+			static float f = 0.0f;
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		}
+
+
+		ImGui::Render();
+		ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
 		//swap front & back buffers
 		glfwSwapBuffers(window);
@@ -160,7 +182,11 @@ int main(void)
 		glfwPollEvents();
 	}
 
-	//GLCall(glDeleteProgram(shader));
+
+	// Cleanup
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
+
 	glfwTerminate();
 	return 0;
 }
