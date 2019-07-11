@@ -24,7 +24,7 @@ void Renderer::Clear() const
 void Renderer::Draw(const VertexArray & va, const IndexBuffer & ib, const Shader & shader) const
 {
 	shader.Bind();
-	va.Bind();
+	va.Bind();		//already has a binding to ib
 	ib.Bind();
 
 	//draw what is bound
