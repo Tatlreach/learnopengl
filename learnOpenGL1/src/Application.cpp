@@ -25,6 +25,8 @@
 
 #include "tests/TestClearColor.h"
 
+#include "tests/Test.h"
+
 int main(void)
 {
 
@@ -65,6 +67,12 @@ int main(void)
 	ImGui_ImplGlfwGL3_Init(window, true);
 	ImGui::StyleColorsDark();
 
+	test::Test* currentTest = nullptr;
+	test::TestMenu* testMenu = new test::TestMenu(currentTest);
+	currentTest = testMenu;
+
+	testMenu->RegisterTest<test::TestClearColor>("Clear color");
+
 	test::TestClearColor test;
 	
 	//loop until window closed
@@ -72,11 +80,23 @@ int main(void)
 
 		//GLClearError();	//remove all existing error enums
 		renderer.Clear();
+		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 
-		test.OnUpdate(0.0f);
-		test.OnRender();
+		//test.OnUpdate(0.0f);
+		//test.OnRender();
 
 		ImGui_ImplGlfwGL3_NewFrame();
+		if (currentTest) {
+			currentTest->OnUpdate(0.0f);
+			currentTest->OnRender();
+			ImGui::Begin("Test");
+			if (currentTest != testMenu && ImGui::Button("<-") ) {
+				delete currentTest;
+				currentTest = testMenu;
+			}
+			currentTest->OnImGuiRender();
+			ImGui::End();
+		}
 
 		test.OnImGuiRender();
 
@@ -89,7 +109,9 @@ int main(void)
 		//poll for and process events
 		glfwPollEvents();
 	}
-
+	delete currentTest;
+	if (currentTest != testMenu)
+		delete testMenu;
 
 	// Cleanup
 	ImGui_ImplGlfwGL3_Shutdown();
